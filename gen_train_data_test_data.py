@@ -5,26 +5,22 @@ from os import listdir
 from keras.utils import np_utils
 
 species = [
-    "blasti",
-    "bonegl",
-    "brhkyt",
-    "cbrtsh",
-    "cmnmyn",
-    "gretit",
-    "hilpig",
-    "himbul",
-    "himgri",
-    "hsparo",
-    "indvul",
-    "jglowl",
-    "lbicrw",
-    "mgprob",
-    "rebimg",
-    "wcrsrt",
+    "Alopias",
+    "Carcharias",
+    "Carcharodon",
+    "Galeocerdo",
+    "Heterodontus",
+    "Hexanchus",
+    "Negaprion",
+    "Orectolobus",
+    "Prionace",
+    "Rhincodon",
+    "Sphyrna",
+    "Triaenodon",
 ]
 
 datapath = "./"
-N_CLASSES = 16  # Number of classes
+N_CLASSES = 12  # Number of classes
 
 
 def gen_data():

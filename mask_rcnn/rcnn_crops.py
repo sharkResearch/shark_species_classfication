@@ -14,22 +14,18 @@ from os import rename, listdir, rename, makedirs
 ROOT_DIR = os.path.abspath("../train_images")
 
 species = [
-    "blasti",
-    "bonegl",
-    "brhkyt",
-    "cbrtsh",
-    "cmnmyn",
-    "gretit",
-    "hilpig",
-    "himbul",
-    "himgri",
-    "hsparo",
-    "indvul",
-    "jglowl",
-    "lbicrw",
-    "mgprob",
-    "rebimg",
-    "wcrsrt",
+    "Alopias",
+    "Carcharias",
+    "Carcharodon",
+    "Galeocerdo",
+    "Heterodontus",
+    "Hexanchus",
+    "Negaprion",
+    "Orectolobus",
+    "Prionace",
+    "Rhincodon",
+    "Sphyrna",
+    "Triaenodon",
 ]
 
 # Import Mask RCNN

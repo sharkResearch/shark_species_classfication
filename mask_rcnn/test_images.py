@@ -39,29 +39,25 @@ from keras.regularizers import l2
 
 BATCH_SIZE = 32
 VALIDATION_SPLIT = 0.1
-N_CLASSES = 16
+N_CLASSES = 12
 EPOCHS = 7
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("./")
 
 species = [
-    "blasti",
-    "bonegl",
-    "brhkyt",
-    "cbrtsh",
-    "cmnmyn",
-    "gretit",
-    "hilpig",
-    "himbul",
-    "himgri",
-    "hsparo",
-    "indvul",
-    "jglowl",
-    "lbicrw",
-    "mgprob",
-    "rebimg",
-    "wcrsrt",
+    "Alopias",
+    "Carcharias",
+    "Carcharodon",
+    "Galeocerdo",
+    "Heterodontus",
+    "Hexanchus",
+    "Negaprion",
+    "Orectolobus",
+    "Prionace",
+    "Rhincodon",
+    "Sphyrna",
+    "Triaenodon",
 ]
 species_check = ["hsparo"]
 # Import Mask RCNN

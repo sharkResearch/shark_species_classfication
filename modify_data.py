@@ -3,22 +3,18 @@ from os import listdir, makedirs
 from shutil import copyfile
 
 species = [
-    "blasti",
-    "bonegl",
-    "brhkyt",
-    "cbrtsh",
-    "cmnmyn",
-    "gretit",
-    "hilpig",
-    "himbul",
-    "himgri",
-    "hsparo",
-    "indvul",
-    "jglowl",
-    "lbicrw",
-    "mgprob",
-    "rebimg",
-    "wcrsrt",
+    "Alopias",
+    "Carcharias",
+    "Carcharodon",
+    "Galeocerdo",
+    "Heterodontus",
+    "Hexanchus",
+    "Negaprion",
+    "Orectolobus",
+    "Prionace",
+    "Rhincodon",
+    "Sphyrna",
+    "Triaenodon",
 ]
 
 
