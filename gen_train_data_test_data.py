@@ -38,7 +38,7 @@ def gen_data():
 
         # Samples Location
         train_data = join(datapath, "train/" + bird_specie)
-        val_data = join(datapath, "valid/" + bird_specie)
+        val_data = join(datapath, "validation/" + bird_specie)
         test_data = join(datapath, "test/" + bird_specie)
 
         # Samples Files
