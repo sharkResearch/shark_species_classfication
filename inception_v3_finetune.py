@@ -13,12 +13,20 @@ from keras.callbacks import LearningRateScheduler
 from keras import backend as K
 from keras.utils.generic_utils import get_custom_objects
 from keras.applications.inception_v3 import InceptionV3
+import tensorflow as tf
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+  try:
+    for gpu in gpus:
+      tf.config.experimental.set_memory_growth(gpu, True)
+  except RuntimeError as e:
+    print(e)
 
 
-BATCH_SIZE = 32
+BATCH_SIZE = 16
 VALIDATION_SPLIT = 0.1
-N_CLASSES = 16
-EPOCHS = 7
+N_CLASSES = 12
+EPOCHS = 12
 
 
 def swish(x):
@@ -85,7 +93,7 @@ def f1(y_true, y_pred):
 # Inecption_V3 model define
 def build_inceptionV3(
     img_shape=(416, 416, 3),
-    n_classes=16,
+    n_classes=12,
     l2_reg=0.0,
     load_pretrained=True,
     freeze_layers_from="base_model",
@@ -158,16 +166,16 @@ if __name__ == "__main__":
     # y_train_crop = np_utils.to_categorical(y_train, N_CLASSES)
 
     # Loading Original Images for training resized to 416x416
-    # x_train_original = np.load('X_train.npy')
-    # y_train_original = np.load('Y_train.npy')
-    # x_valid          = np.load('X_valid.npy')
-    # y_valid          = np.load('Y_valid.npy')
+    x_train_original = np.load('X_train.npy')
+    y_train_original = np.load('Y_train.npy')
+    x_valid          = np.load('X_valid.npy')
+    y_valid          = np.load('Y_valid.npy')
 
     # Loading Original Images for Testing resized to 416x416
     x_test = np.load("X_test.npy")
-    y_test = np.load("Y_test_categorical.npy")
+    y_test = np.load("Y_test.npy")
 
-    # print(x_train.shape, y_train.shape)
+    print(x_train_original.shape, y_train_original.shape)
 
     # Learning Rate Schedule
     lrate = LearningRateScheduler(step_decay)
@@ -176,20 +184,20 @@ if __name__ == "__main__":
     model = build_inceptionV3()
 
     # Loading Trained weights
-    model.load_weights("inception_v3_crops+images.h5")
+    # model.load_weights("inception_v3_crops+images.h5")
 
     # Model Fitting
-    # history = model.fit(x_train_original, y_train_original,
-    #       batch_size=BATCH_SIZE,
-    #       epochs=EPOCHS,
-    #       verbose= 1,
-    #     # steps_per_epoch=x_train.shape[0]//BATCH_SIZE,
-    #     callbacks = [lrate],
-    #     validation_data=(x_valid, y_valid)
-    #     )
+    history = model.fit(x_train_original, y_train_original,
+        batch_size=BATCH_SIZE,
+        epochs=EPOCHS,
+        verbose= 1,
+        # steps_per_epoch=x_train.shape[0]//BATCH_SIZE,
+        callbacks = [lrate],
+        validation_data=(x_valid, y_valid)
+        )
 
     # Save model weights
-    # model.save_weights('inception_v3_crops+images.h5')
+    model.save_weights('inception_v3_crops+images.h5')
 
     # Calculate score over test data
     score = model.evaluate(x_test, y_test, verbose=1, batch_size=BATCH_SIZE)
