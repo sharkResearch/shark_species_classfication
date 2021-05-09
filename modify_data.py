@@ -2,24 +2,53 @@ from os.path import join, exists
 from os import listdir, makedirs
 from shutil import copyfile
 
+# TODO: update species here
 species = [
     "Alopias",
+    "Asymbolus",
+    "Carcharhinus",
     "Carcharias",
     "Carcharodon",
+    "Cephaloscyllium",
+    "Cetorhinus",
+    "Chiloscyllium",
+    "Chimaera",
+    "Echinorhinus",
+    "Etmopterus",
+    "Eucrossorhinus",
     "Galeocerdo",
+    "Galeorhinus",
+    "Galeus",
+    "Ginglymostoma",
+    "Haploblepharus",
+    "Hemipristis",
+    "Hemiscyllium",
     "Heterodontus",
     "Hexanchus",
+    "Hydrolagus",
+    "Isurus",
+    "Lamna",
+    "Megachasma",
+    "Mustelus",
+    "Nebrius",
     "Negaprion",
+    "Notorynchus",
     "Orectolobus",
+    "Poroderma",
     "Prionace",
     "Rhincodon",
+    "Scyliorhinus",
     "Sphyrna",
+    "Squalus",
+    "Squatina",
+    "Stegostoma",
     "Triaenodon",
+    "Triakis"
 ]
 
-
-source_folder = "./train_data/"
-destination_folder = "./train/"
+# TODO: update the source and destination folder here
+source_folder = "../model/dataset_top/training_set/"
+destination_folder = "train/"
 
 
 def rename_files():

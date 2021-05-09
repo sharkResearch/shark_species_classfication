@@ -3,23 +3,51 @@ from os.path import join
 import os
 from imgaug import augmenters as iaa
 
-augmented_image_dir = "./train/"
+# TODO: update train folder and genus name here
+augmented_image_dir = "train/"
 
 species = [
     "Alopias",
+    "Asymbolus",
+    "Carcharhinus",
     "Carcharias",
     "Carcharodon",
+    "Cephaloscyllium",
+    "Cetorhinus",
+    "Chiloscyllium",
+    "Chimaera",
+    "Echinorhinus",
+    "Etmopterus",
+    "Eucrossorhinus",
     "Galeocerdo",
+    "Galeorhinus",
+    "Galeus",
+    "Ginglymostoma",
+    "Haploblepharus",
+    "Hemipristis",
+    "Hemiscyllium",
     "Heterodontus",
     "Hexanchus",
+    "Hydrolagus",
+    "Isurus",
+    "Lamna",
+    "Megachasma",
+    "Mustelus",
+    "Nebrius",
     "Negaprion",
+    "Notorynchus",
     "Orectolobus",
+    "Poroderma",
     "Prionace",
     "Rhincodon",
+    "Scyliorhinus",
     "Sphyrna",
+    "Squalus",
+    "Squatina",
+    "Stegostoma",
     "Triaenodon",
+    "Triakis"
 ]
-
 
 """ Naming conventions can be different. This is
 what I've used at my time. I just followed the table
@@ -114,8 +142,8 @@ def save_images(
 # Dataset Augmentation
 
 gauss = iaa.AdditiveGaussianNoise(scale=0.2 * 255)
-# blur = iaa.GaussianBlur(sigma=(3.0))
-# flip = iaa.Fliplr(1.0)
+blur = iaa.GaussianBlur(sigma=(3.0))
+flip = iaa.Fliplr(1.0)
 # contrast = iaa.ContrastNormalization((0.5, 1.5), per_channel=0.5)
 sharp = iaa.Sharpen(alpha=(0, 0.3), lightness=(0.7, 1.3))
 affine = iaa.Affine(translate_px={"x": (-50, 50), "y": (-50, 50)})
@@ -155,30 +183,123 @@ def main():
         print(source_images)
         source_images.sort(key=lambda f: int("".join(filter(str.isdigit, f))))
 
-        augmented_images_arr = []
+        augmented_images_arr_1 = []
+        augmented_images_arr_2 = []
+        augmented_images_arr_3 = []
+        augmented_images_arr_5 = []
+        augmented_images_arr_6 = []
         img_number = []
         bird_specie_number = source_images[0]
         bird_specie_number = int(bird_specie_number[2:4])
         for source_image in source_images:
 
-            if int(source_image[0]) == 1:
+            if int(source_image[4]) == 1:
 
                 img_number.append(source_image[4:6])
                 img_path = join(augmented_image_folder, source_image)
 
                 img = cv2.imread(img_path)
-                augmented_images_arr.append(img)
+                augmented_images_arr_1.append(img)
+            
+            if int(source_image[4]) == 2:
+
+                img_number.append(source_image[4:6])
+                img_path = join(augmented_image_folder, source_image)
+
+                img = cv2.imread(img_path)
+                augmented_images_arr_2.append(img)
+
+            if int(source_image[4]) == 3:
+
+                img_number.append(source_image[4:6])
+                img_path = join(augmented_image_folder, source_image)
+
+                img = cv2.imread(img_path)
+                augmented_images_arr_3.append(img)
+
+            if int(source_image[4]) == 5:
+
+                img_number.append(source_image[4:6])
+                img_path = join(augmented_image_folder, source_image)
+
+                img = cv2.imread(img_path)
+                augmented_images_arr_5.append(img)
+
+            if int(source_image[4]) == 6:
+
+                img_number.append(source_image[4:6])
+                img_path = join(augmented_image_folder, source_image)
+
+                img = cv2.imread(img_path)
+                augmented_images_arr_6.append(img)
 
         counter = 0
-        if len(augmented_images_arr) < 9:
+        if len(augmented_images_arr_1) < 11:
+            print("Gaussian Noise")
             # Applying Gaussian image augmentation
-            for augmented_image in gauss.augment_images(augmented_images_arr):
+            for augmented_image in gauss.augment_images(augmented_images_arr_1):
                 save_images(
                     augmented_image,
                     augmented_image_folder,
                     img_number[counter],
                     bird_specie_number,
                     20,
+                )
+                counter += 1
+
+        counter = 0
+        if len(augmented_images_arr_2) < 11:
+            print("Gaussian Blur")
+            # Applying Gaussian image augmentation
+            for augmented_image in blur.augment_images(augmented_images_arr_2):
+                save_images(
+                    augmented_image,
+                    augmented_image_folder,
+                    img_number[counter],
+                    bird_specie_number,
+                    30,
+                )
+                counter += 1
+        
+        counter = 0
+        if len(augmented_images_arr_3) < 11:
+            print("Flip")
+            # Applying Gaussian image augmentation
+            for augmented_image in flip.augment_images(augmented_images_arr_3):
+                save_images(
+                    augmented_image,
+                    augmented_image_folder,
+                    img_number[counter],
+                    bird_specie_number,
+                    40,
+                )
+                counter += 1
+
+        counter = 0
+        if len(augmented_images_arr_5) < 11:
+            print("Sharp")
+            # Applying Gaussian image augmentation
+            for augmented_image in sharp.augment_images(augmented_images_arr_5):
+                save_images(
+                    augmented_image,
+                    augmented_image_folder,
+                    img_number[counter],
+                    bird_specie_number,
+                    13,
+                )
+                counter += 1
+
+        counter = 0
+        if len(augmented_images_arr_6) < 11:
+            print("Affine transform")
+            # Applying Gaussian image augmentation
+            for augmented_image in affine.augment_images(augmented_images_arr_6):
+                save_images(
+                    augmented_image,
+                    augmented_image_folder,
+                    img_number[counter],
+                    bird_specie_number,
+                    16,
                 )
                 counter += 1
 

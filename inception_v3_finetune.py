@@ -25,7 +25,8 @@ if gpus:
 
 BATCH_SIZE = 16
 VALIDATION_SPLIT = 0.1
-N_CLASSES = 12
+# TODO: update class number here
+N_CLASSES = 40
 EPOCHS = 12
 
 
@@ -93,7 +94,7 @@ def f1(y_true, y_pred):
 # Inecption_V3 model define
 def build_inceptionV3(
     img_shape=(416, 416, 3),
-    n_classes=12,
+    n_classes=40,
     l2_reg=0.0,
     load_pretrained=True,
     freeze_layers_from="base_model",
@@ -160,11 +161,6 @@ def build_inceptionV3(
 
 if __name__ == "__main__":
 
-    # Loading Cropped Images for Training resized to 416x416
-    # x_train_crop = np.load('X_train_crop.npy')
-    # y_train_crop = np.load('Y_train_crop.npy')
-    # y_train_crop = np_utils.to_categorical(y_train, N_CLASSES)
-
     # Loading Original Images for training resized to 416x416
     x_train_original = np.load('X_train.npy')
     y_train_original = np.load('Y_train.npy')
@@ -176,6 +172,7 @@ if __name__ == "__main__":
     y_test = np.load("Y_test.npy")
 
     print(x_train_original.shape, y_train_original.shape)
+    print(x_test.shape, y_test.shape)
 
     # Learning Rate Schedule
     lrate = LearningRateScheduler(step_decay)

@@ -15,10 +15,11 @@ from keras import backend as K
 from keras.utils.generic_utils import get_custom_objects
 
 
-BATCH_SIZE = 8
+BATCH_SIZE = 16
 VALIDATION_SPLIT = 0.1
-N_CLASSES = 12
-EPOCHS = 7
+# TODO: update class number here
+N_CLASSES = 40
+EPOCHS = 6
 
 
 # Swish Activation Function
@@ -86,7 +87,7 @@ def f1(y_true, y_pred):
 # Inception_ResNet_V2 model define
 def build_inception_resnet_V2(
     img_shape=(416, 416, 3),
-    n_classes=12,
+    n_classes=40,
     l2_reg=0.0,
     load_pretrained=True,
     freeze_layers_from="base_model",
